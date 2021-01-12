@@ -78,6 +78,7 @@ app.post("/api/initiatePayment", async (req, res) => {
       //   accountCreationDate: "2019-01-17T13:42:40+01:00",
       // },
     });
+    console.log("initiate payment response");
     console.log(response);
     const { action } = response;
     // console.log(action);

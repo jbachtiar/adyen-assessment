@@ -23,7 +23,7 @@ function PaymentResult() {
       }
     }
     if (param.payload) {
-      getPaymentDetails(param.payload, reactLocalStorage.get("paymentData"));
+      getPaymentDetails(param, reactLocalStorage.get("paymentData"));
     }
   }, []);
 
@@ -35,7 +35,16 @@ function PaymentResult() {
 
         // threeds2fingerprint: state.data.details.threeds2.fingerprint,
       })
-      .then((res) => {});
+      .then((res) => {
+        console.log(res);
+        if (res.data.resultCode == "Authorised") {
+          setResult("Authorised");
+        }
+        if (res.data.resultCode == "Refused") {
+          setResult("Refused");
+          setRefusalCode(res.data.refusalCode);
+        }
+      });
   }
   if (result == "Authorised") {
     return <div>Payment Successful</div>;
